@@ -1,9 +1,42 @@
 <?php
-namespace Libs\Database;
-class MySQL{
 
-public function connect(){
-    echo" MySQL connect <br>";
-    
-}
+namespace Libs\Database;
+
+use PDO;
+use PDOException;
+
+class MySQL
+{
+    private PDO $db;
+
+    public function __construct(
+        private $dbhost="localhost", 
+        private $dbuser="root", 
+        private $dbpass="",
+        private $dbname="project", 
+    )
+    {
+       $this->connect();
+    }
+
+    public function connect()
+    {
+        try {
+            $this->db = new PDO(
+                "mysql:host=$this->dbhost;port=3307;dbname=$this->dbname",
+                $this->dbuser,
+                $this->dbpass,
+                [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+                ]
+            );
+
+            return $this->db;
+            
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
 }

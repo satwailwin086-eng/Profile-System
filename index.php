@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container mt-4 text-center" style="max-width: 600px">
-        <h1 class="h3">Login</h1>
+        <h1 class="h3 mb-3">Login</h1>
 
-        <?php 
-        if (isset($_GET['incorrect'])): ?>
+        <?php if (isset($_GET['incorrect'])): ?>
             <div class="alert alert-warning">
-            Incorrect Email or password</div>
-
+                Incorrect email or password
+            </div>
         <?php endif ?>
-         
-    
-        <form action="_actions\login.php" method="post" class="mb-3">
+
+        <?php if (isset($_GET['suspended'])): ?>
+            <div class="alert alert-danger">
+                Account suspended!
+            </div>
+        <?php endif ?>
+
+        <?php if (isset($_GET['register'])): ?>
+            <div class="alert alert-info">
+                Account created
+            </div>
+        <?php endif ?>
+
+        <form action="_actions/login.php" class="mb-3" method="post">
             <input type="email" class="form-control mb-2" name="email" placeholder="Email" required>
             <input type="password" class="form-control mb-2" name="password" placeholder="Password" required>
-            <button class="btn btn-primary w-50">Login</button>
+            <button class="btn btn-primary w-100">Login</button>
         </form>
         <a href="register.php">Register</a>
     </div>
-    
 </body>
+
 </html>

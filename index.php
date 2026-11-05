@@ -24,6 +24,8 @@
             </div>
         <?php endif ?>
 
+        
+
         <?php if (isset($_GET['register'])): ?>
             <div class="alert alert-info">
                 Account created
